@@ -29,5 +29,18 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+# Visual Studio files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Java files
+target/
+*.jar
+*.war
+*.ear
+
 ### VS Code ###
 .vscode/
