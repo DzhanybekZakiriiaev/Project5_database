@@ -12,16 +12,16 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "\"Parts\"")
+@Table(name = "parts")
 public class Part extends BaseEntity {
 
     @NotBlank
     @Size(max = 255)
-    @Column(name = "\"name\"", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "\"machine_id\"")
+    @JoinColumn(name = "machine_id")
     private Machine machine;
 
     @OneToMany(mappedBy = "part", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

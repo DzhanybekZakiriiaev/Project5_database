@@ -12,12 +12,12 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "\"Machines\"")
+@Table(name = "machines")
 public class Machine extends BaseEntity {
 
     @NotBlank
     @Size(max = 255)
-    @Column(name = "\"name\"", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @OneToMany(mappedBy = "machine", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

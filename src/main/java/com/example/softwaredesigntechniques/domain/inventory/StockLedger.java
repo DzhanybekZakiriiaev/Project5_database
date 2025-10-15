@@ -14,35 +14,35 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "\"Stock_Ledger\"", schema = "inventory")
+@Table(name = "stock_ledger", schema = "inventory")
 public class StockLedger implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "\"id\"", columnDefinition = "UUID")
+    @Column(name = "id", columnDefinition = "UUID")
     private UUID id;
 
     @NotNull
-    @Column(name = "\"item_id\"", nullable = false)
+    @Column(name = "item_id", nullable = false)
     private UUID itemId;
 
     @NotNull
-    @Column(name = "\"delta\"", nullable = false)
+    @Column(name = "delta", nullable = false)
     private Integer delta;
 
     @NotBlank
-    @Column(name = "\"reason\"", nullable = false)
+    @Column(name = "reason", nullable = false)
     private String reason;
 
     @NotBlank
-    @Column(name = "\"ref_id\"", unique = true, nullable = false)
+    @Column(name = "ref_id", unique = true, nullable = false)
     private String refId;
 
-    @Column(name = "\"created_at\"")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "\"item_id\"", insertable = false, updatable = false)
+    @JoinColumn(name = "item_id", insertable = false, updatable = false)
     private Item item;
 
     public StockLedger() {}

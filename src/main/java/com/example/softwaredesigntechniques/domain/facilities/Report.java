@@ -12,29 +12,29 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @Entity
-@Table(name = "\"Reports\"")
+@Table(name = "reports")
 public class Report extends BaseEntity {
 
     @NotBlank
     @Size(max = 255)
-    @Column(name = "\"report_text\"", nullable = false)
+    @Column(name = "report_text", nullable = false)
     private String reportText;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "\"log_id\"", nullable = false)
+    @JoinColumn(name = "log_id", nullable = false)
     private Log log;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "\"part_id\"")
+    @JoinColumn(name = "part_id")
     private Part part;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "\"machine_id\"")
+    @JoinColumn(name = "machine_id")
     private Machine machine;
 
     @NotNull
-    @Column(name = "\"needs_repair\"", nullable = false)
+    @Column(name = "needs_repair", nullable = false)
     private Boolean needsRepair;
 
     public Report() {}

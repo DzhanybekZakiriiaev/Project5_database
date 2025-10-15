@@ -12,11 +12,11 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "\"Logs\"")
+@Table(name = "logs")
 public class Log extends BaseEntity {
 
     @NotNull
-    @Column(name = "\"date\"", nullable = false)
+    @Column(name = "date", nullable = false)
     private LocalDate date;
 
     @OneToMany(mappedBy = "log", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

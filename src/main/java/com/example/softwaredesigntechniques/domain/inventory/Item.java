@@ -19,33 +19,33 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "\"Items\"", schema = "inventory")
+@Table(name = "items", schema = "inventory")
 @EntityListeners(AuditingEntityListener.class)
 public class Item implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "\"id\"", columnDefinition = "UUID")
+    @Column(name = "id", columnDefinition = "UUID")
     private UUID id;
 
     @CreatedDate
-    @Column(name = "\"created_at\"")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
     @LastModifiedDate
-    @Column(name = "\"updated_at\"")
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     @Size(max = 255)
-    @Column(name = "\"sku\"", unique = true)
+    @Column(name = "sku", unique = true)
     private String sku;
 
     @NotBlank
-    @Column(name = "\"name\"", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @NotNull
-    @Column(name = "\"reorder_point\"", nullable = false)
+    @Column(name = "reorder_point", nullable = false)
     private Integer reorderPoint = 0;
 
     @OneToOne(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

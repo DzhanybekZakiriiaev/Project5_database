@@ -13,22 +13,22 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "\"Stock_Levels\"", schema = "inventory")
+@Table(name = "stock_levels", schema = "inventory")
 public class StockLevel implements Serializable {
 
     @Id
-    @Column(name = "\"item_id\"")
+    @Column(name = "item_id")
     private UUID itemId;
 
     @NotNull
-    @Column(name = "\"level\"", nullable = false)
+    @Column(name = "level", nullable = false)
     private Integer level = 0;
 
-    @Column(name = "\"updated_at\"")
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "\"item_id\"")
+    @JoinColumn(name = "item_id")
     @MapsId
     private Item item;
 

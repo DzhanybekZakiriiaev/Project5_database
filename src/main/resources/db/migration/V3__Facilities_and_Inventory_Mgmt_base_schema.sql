@@ -1,143 +1,111 @@
--- Migration V3:
--- This migration will drop all the test tables and implement the schemas provided by the
--- Facilities and Inventory Management teams
+-- V3__Facilities_and_Inventory_Mgmt_base_schema.sql
+-- Creates base schema for Facilities (public) and Inventory (inventory schema)
+-- Postgres-compatible, idempotent where safe, avoids quoted/mixed-case identifiers
 
--- Drop tables if they exist (in reverse order due to foreign key constraints)
-DROP TABLE IF EXISTS products CASCADE;
-DROP TABLE IF EXISTS users CASCADE;
+-- UUID generation for inventory tables
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
--------------------------------
--- Facilities schema (public)
--------------------------------
-CREATE TABLE IF NOT EXISTS "Machines"(
-    "id" BIGINT PRIMARY KEY,
-    "name" VARCHAR(255) NOT NULL
+-- =========================================================
+-- PUBLIC SCHEMA: FACILITIES DOMAIN
+-- =========================================================
+
+-- Logs of daily operations or maintenance
+CREATE TABLE IF NOT EXISTS logs (
+  id           BIGSERIAL PRIMARY KEY,
+  date         DATE NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS "Parts"(
-    "id" BIGINT PRIMARY KEY,
-    "name" VARCHAR(255) NOT NULL,
-    "machine_id" BIGINT NULL
+-- Machines in the facility
+CREATE TABLE IF NOT EXISTS machines (
+  id           BIGSERIAL PRIMARY KEY,
+  name         VARCHAR(255) NOT NULL UNIQUE
 );
 
-CREATE TABLE IF NOT EXISTS "Logs"(
-    "id" BIGINT PRIMARY KEY,
-    "date" DATE NOT NULL
+-- Parts associated with machines (nullable relationship)
+CREATE TABLE IF NOT EXISTS parts (
+  id           BIGSERIAL PRIMARY KEY,
+  name         VARCHAR(255) NOT NULL,
+  machine_id   BIGINT NULL REFERENCES machines(id) ON DELETE SET NULL
 );
 
-CREATE TABLE IF NOT EXISTS "Reports"(
-    "id" BIGINT PRIMARY KEY,
-    "report_text" VARCHAR(255) NOT NULL,
-    "log_id" BIGINT NOT NULL,
-    "part_id" BIGINT NULL,
-    "machine_id" BIGINT NULL,
-    "needs_repair" BOOLEAN NOT NULL
+-- Reports referencing logs, optional part/machine, and repair flag
+CREATE TABLE IF NOT EXISTS reports (
+  id           BIGSERIAL PRIMARY KEY,
+  report_text  TEXT NOT NULL,
+  log_id       BIGINT NOT NULL REFERENCES logs(id) ON DELETE CASCADE,
+  part_id      BIGINT NULL REFERENCES parts(id) ON DELETE SET NULL,
+  machine_id   BIGINT NULL REFERENCES machines(id) ON DELETE SET NULL,
+  needs_repair BOOLEAN NOT NULL
 );
 
-DO $$
-BEGIN
-    IF NOT EXISTS (
-        SELECT 1 FROM information_schema.table_constraints
-        WHERE constraint_name = 'parts_machine_id_foreign'
-          AND table_name = 'Parts'
-    ) THEN
-        ALTER TABLE "Parts"
-            ADD CONSTRAINT "parts_machine_id_foreign"
-            FOREIGN KEY ("machine_id") REFERENCES "Machines"("id");
-    END IF;
+-- Helpful indexes
+CREATE INDEX IF NOT EXISTS idx_reports_log_id        ON reports (log_id);
+CREATE INDEX IF NOT EXISTS idx_reports_machine_id    ON reports (machine_id);
+CREATE INDEX IF NOT EXISTS idx_parts_machine_id      ON parts (machine_id);
 
-    IF NOT EXISTS (
-        SELECT 1 FROM information_schema.table_constraints
-        WHERE constraint_name = 'reports_part_id_foreign'
-          AND table_name = 'Reports'
-    ) THEN
-        ALTER TABLE "Reports"
-            ADD CONSTRAINT "reports_part_id_foreign"
-            FOREIGN KEY ("part_id") REFERENCES "Parts"("id");
-    END IF;
+-- =========================================================
+-- INVENTORY SCHEMA: ITEMS, STOCK LEVELS, LEDGER
+-- =========================================================
 
-    IF NOT EXISTS (
-        SELECT 1 FROM information_schema.table_constraints
-        WHERE constraint_name = 'reports_log_id_foreign'
-          AND table_name = 'Reports'
-    ) THEN
-        ALTER TABLE "Reports"
-            ADD CONSTRAINT "reports_log_id_foreign"
-            FOREIGN KEY ("log_id") REFERENCES "Logs"("id");
-    END IF;
+CREATE SCHEMA IF NOT EXISTS inventory;
 
-    IF NOT EXISTS (
-        SELECT 1 FROM information_schema.table_constraints
-        WHERE constraint_name = 'reports_machine_id_foreign'
-          AND table_name = 'Reports'
-    ) THEN
-        ALTER TABLE "Reports"
-            ADD CONSTRAINT "reports_machine_id_foreign"
-            FOREIGN KEY ("machine_id") REFERENCES "Machines"("id");
-    END IF;
-END $$;
-
-CREATE INDEX IF NOT EXISTS idx_reports_log_id     ON "Reports"("log_id");
-CREATE INDEX IF NOT EXISTS idx_reports_machine_id ON "Reports"("machine_id");
-CREATE INDEX IF NOT EXISTS idx_parts_machine_id   ON "Parts"("machine_id");
-
--------------------------------
--- Inventory schema
--------------------------------
-CREATE SCHEMA IF NOT EXISTS "inventory";
-
-CREATE TABLE IF NOT EXISTS "inventory"."Items" (
-    "id" UUID PRIMARY KEY,
-    "sku" TEXT UNIQUE,
-    "name" TEXT NOT NULL,
-    "reorder_point" INT NOT NULL DEFAULT 0,
-    "created_at" TIMESTAMPTZ NOT NULL DEFAULT now(),
-    "updated_at" TIMESTAMPTZ NOT NULL DEFAULT now()
+-- Master data for inventory items
+CREATE TABLE IF NOT EXISTS inventory.items (
+  id             UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  sku            TEXT UNIQUE,
+  name           TEXT NOT NULL,
+  reorder_point  INT NOT NULL DEFAULT 0,
+  created_at     TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at     TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE TABLE IF NOT EXISTS "inventory"."Stock_Levels" (
-    "item_id" UUID PRIMARY KEY,
-    "level" INT NOT NULL DEFAULT 0,
-    "updated_at" TIMESTAMPTZ NOT NULL DEFAULT now()
+-- Current stock level per item (1:1)
+CREATE TABLE IF NOT EXISTS inventory.stock_levels (
+  item_id     UUID PRIMARY KEY
+              REFERENCES inventory.items(id) ON DELETE CASCADE,
+  level       INT NOT NULL DEFAULT 0,
+  updated_at  TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-CREATE TABLE IF NOT EXISTS "inventory"."Stock_Ledger" (
-    "id" UUID PRIMARY KEY,
-    "item_id" UUID NOT NULL,
-    "delta" INT NOT NULL,
-    "reason" TEXT NOT NULL,
-    "ref_id" TEXT UNIQUE NOT NULL,
-    "created_at" TIMESTAMPTZ NOT NULL DEFAULT now()
+-- Immutable movement log for stock changes
+CREATE TABLE IF NOT EXISTS inventory.stock_ledger (
+  id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  item_id     UUID NOT NULL
+              REFERENCES inventory.items(id) ON DELETE CASCADE,
+  delta       INT NOT NULL,               -- positive for inbound, negative for outbound
+  reason      TEXT NOT NULL,              -- e.g., "purchase", "adjustment", "usage"
+  ref_id      TEXT UNIQUE NOT NULL,       -- external reference (PO#, WO#, etc.)
+  created_at  TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
-DO $$
-BEGIN
-    IF NOT EXISTS (
-        SELECT 1 FROM information_schema.table_constraints
-        WHERE constraint_schema = 'inventory'
-          AND table_name = 'Stock_Levels'
-          AND constraint_name = 'stock_levels_item_id_fkey'
-    ) THEN
-        ALTER TABLE "inventory"."Stock_Levels"
-            ADD CONSTRAINT "stock_levels_item_id_fkey"
-            FOREIGN KEY ("item_id")
-            REFERENCES "inventory"."Items" ("id")
-            ON DELETE CASCADE;
-    END IF;
+-- Helpful indexes
+CREATE INDEX IF NOT EXISTS idx_items_sku                  ON inventory.items (sku);
+CREATE INDEX IF NOT EXISTS idx_stock_ledger_item_id       ON inventory.stock_ledger (item_id);
 
-    IF NOT EXISTS (
-        SELECT 1 FROM information_schema.table_constraints
-        WHERE constraint_schema = 'inventory'
-          AND table_name = 'Stock_Ledger'
-          AND constraint_name = 'stock_ledger_item_id_fkey'
-    ) THEN
-        ALTER TABLE "inventory"."Stock_Ledger"
-            ADD CONSTRAINT "stock_ledger_item_id_fkey"
-            FOREIGN KEY ("item_id")
-            REFERENCES "inventory"."Items" ("id")
-            ON DELETE CASCADE;
-    END IF;
-END $$;
-
-CREATE INDEX IF NOT EXISTS idx_items_sku ON "inventory"."Items"("sku");
-CREATE INDEX IF NOT EXISTS idx_stock_ledger_item_id ON "inventory"."Stock_Ledger"("item_id");
+-- =========================================================
+-- (Optional) simple updated_at maintenance triggers
+-- Uncomment if you want automatic updated_at refreshes
+-- =========================================================
+-- CREATE OR REPLACE FUNCTION inventory_touch_updated_at() RETURNS trigger AS $$
+-- BEGIN
+--   NEW.updated_at := now();
+--   RETURN NEW;
+-- END; $$ LANGUAGE plpgsql;
+--
+-- DO $$
+-- BEGIN
+--   IF NOT EXISTS (
+--     SELECT 1 FROM pg_trigger WHERE tgname = 'trg_items_touch_updated_at'
+--   ) THEN
+--     CREATE TRIGGER trg_items_touch_updated_at
+--     BEFORE UPDATE ON inventory.items
+--     FOR EACH ROW EXECUTE FUNCTION inventory_touch_updated_at();
+--   END IF;
+--   IF NOT EXISTS (
+--     SELECT 1 FROM pg_trigger WHERE tgname = 'trg_stock_levels_touch_updated_at'
+--   ) THEN
+--     CREATE TRIGGER trg_stock_levels_touch_updated_at
+--     BEFORE UPDATE ON inventory.stock_levels
+--     FOR EACH ROW EXECUTE FUNCTION inventory_touch_updated_at();
+--   END IF;
+-- END $$;
