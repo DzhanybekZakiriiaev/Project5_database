@@ -34,7 +34,7 @@ public abstract class BaseEntity implements Serializable {
 
   @Override
   public int hashCode() {
-    var tempId = -1;
+    int tempId = -1;
 
     if (Objects.nonNull(this.id)) {
       tempId = this.id.intValue();
