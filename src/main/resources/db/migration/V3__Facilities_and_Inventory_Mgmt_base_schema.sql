@@ -5,8 +5,6 @@
 -- Drop tables if they exist (in reverse order due to foreign key constraints)
 DROP TABLE IF EXISTS products CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
-DROP TABLE IF EXISTS test_table CASCADE;
-DROP TABLE IF EXISTS test_table2 CASCADE;
 
 -------------------------------
 -- Facilities schema (public)
