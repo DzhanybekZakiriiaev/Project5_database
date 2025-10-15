@@ -35,11 +35,9 @@ CREATE INDEX IF NOT EXISTS idx_products_category ON products(category);
 INSERT INTO users (username, email, first_name, last_name) VALUES 
     ('admin', 'admin@example.com', 'Admin', 'User'),
     ('john_doe', 'john.doe@example.com', 'John', 'Doe'),
-    ('jane_smith', 'jane.smith@example.com', 'Jane', 'Smith')
-ON CONFLICT (username) DO NOTHING;
+    ('jane_smith', 'jane.smith@example.com', 'Jane', 'Smith');
 
 INSERT INTO products (name, description, price, category) VALUES 
     ('Laptop', 'High-performance laptop computer', 1299.99, 'Electronics'),
     ('Smartphone', 'Latest generation smartphone', 899.99, 'Electronics'),
-    ('Coffee Maker', 'Automatic coffee brewing machine', 199.99, 'Appliances')
-ON CONFLICT (name) DO NOTHING;
+    ('Coffee Maker', 'Automatic coffee brewing machine', 199.99, 'Appliances');
