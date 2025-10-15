@@ -48,8 +48,8 @@ public class Item implements Serializable {
     @Column(name = "\"reorder_point\"", nullable = false)
     private Integer reorderPoint = 0;
 
-    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<StockLevel> stockLevels;
+    @OneToOne(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private StockLevel stockLevel;
 
     @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<StockLedger> stockLedger;
