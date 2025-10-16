@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project5 Database Module - Sprint #2 Executive Summary</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; color: #222; line-height: 1.6; }
+        h1, h2, h3 { color: #004f9f; }
+        .section { margin-bottom: 40px; }
+        img { max-width: 100%; border-radius: 8px; margin-top: 10px; }
+        a { color: #004f9f; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        footer { font-size: 0.9em; color: #555; margin-top: 40px; }
+    </style>
+</head>
+<body>
+<h1>Project5 Database Module – Design Sprint #2 Executive Summary</h1>
+
+<div class="section">
+    <h2>1. Project Overview</h2>
+    <p>
+        The Database Team serves as the backbone of the enterprise system, providing persistent data storage and integration between the Facilities, Inventory, POS, HR, and Transaction teams.
+        In Sprint #2, the primary goal was to implement version-controlled database migrations and integrate schemas received from the Facilities and Inventory Management teams.
+    </p>
+</div>
+
+<div class="section">
+    <h2>2. Key Achievements</h2>
+    <ul>
+        <li>Implemented <strong>Flyway V3 migration</strong> to merge Facilities and Inventory schemas into PostgreSQL.</li>
+        <li>Resolved major configuration issues with database connection and Flyway path mapping.</li>
+        <li>Verified migration success via pgAdmin4 and Flyway logs.</li>
+        <li>Documented schema and migration progress with Doxygen auto-generated site.</li>
+        <li>Closed GitHub issue related to migration execution order.</li>
+    </ul>
+</div>
+
+<div class="section">
+    <h2>3. Architecture & Integration</h2>
+    <p>
+        The current system runs on PostgreSQL 15 with the following integrated schemas:
+    </p>
+    <ul>
+        <li><strong>public:</strong> Machines, Parts, Logs, Reports (Facilities)</li>
+        <li><strong>inventory:</strong> Items, Stock_Levels, Stock_Ledger (Inventory Management)</li>
+    </ul>
+    <img src="FacilitiesTeamERD.png" alt="Facilities ERD">
+    <img src="InventoryTeamERD.png" alt="Inventory ERD">
+</div>
+
+<div class="section">
+    <h2>4. Documentation & Release Notes</h2>
+    <ul>
+        <li>Project repository: <a href="https://github.com/DzhanybekZakiriiaev/Project5_database">GitHub Repo</a></li>
+        <li>Doxygen documentation: <a href="./html/index.html">View Documentation</a></li>
+        <li>Version Tag: <strong>v0.2.0-Sprint2</strong></li>
+        <li>Last Migration: <strong>V3__facilities_inventory_integration.sql</strong></li>
+    </ul>
+</div>
+
+<div class="section">
+    <h2>5. Next Steps (Sprint #3 Plan)</h2>
+    <ul>
+        <li>Integrate POS and Transactions team schemas.</li>
+        <li>Implement stored procedures for data consistency.</li>
+        <li>Enhance integration tests and CI/CD validation pipeline.</li>
+        <li>Prepare full enterprise demo showing cross-module communication.</li>
+    </ul>
+</div>
+
+<footer>
+    <p>© 2025 Project5 Database Team – Conestoga College | Sprint #2 Deliverable</p>
+</footer>
+</body>
+</html>

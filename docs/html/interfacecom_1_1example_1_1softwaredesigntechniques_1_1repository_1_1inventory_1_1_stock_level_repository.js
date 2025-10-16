@@ -1,0 +1,4 @@
+var interfacecom_1_1example_1_1softwaredesigntechniques_1_1repository_1_1inventory_1_1_stock_level_repository =
+[
+    [ "findByLevelLessThan", "interfacecom_1_1example_1_1softwaredesigntechniques_1_1repository_1_1inventory_1_1_stock_level_repository.html#a8be06b1665f9f6e297d7a1c3da474ce6", null ]
+];

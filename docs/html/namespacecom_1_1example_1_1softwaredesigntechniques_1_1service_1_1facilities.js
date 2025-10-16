@@ -1,0 +1,8 @@
+var namespacecom_1_1example_1_1softwaredesigntechniques_1_1service_1_1facilities =
+[
+    [ "impl", "namespacecom_1_1example_1_1softwaredesigntechniques_1_1service_1_1facilities_1_1impl.html", "namespacecom_1_1example_1_1softwaredesigntechniques_1_1service_1_1facilities_1_1impl" ],
+    [ "LogService", "interfacecom_1_1example_1_1softwaredesigntechniques_1_1service_1_1facilities_1_1_log_service.html", "interfacecom_1_1example_1_1softwaredesigntechniques_1_1service_1_1facilities_1_1_log_service" ],
+    [ "MachineService", "interfacecom_1_1example_1_1softwaredesigntechniques_1_1service_1_1facilities_1_1_machine_service.html", "interfacecom_1_1example_1_1softwaredesigntechniques_1_1service_1_1facilities_1_1_machine_service" ],
+    [ "PartService", "interfacecom_1_1example_1_1softwaredesigntechniques_1_1service_1_1facilities_1_1_part_service.html", "interfacecom_1_1example_1_1softwaredesigntechniques_1_1service_1_1facilities_1_1_part_service" ],
+    [ "ReportService", "interfacecom_1_1example_1_1softwaredesigntechniques_1_1service_1_1facilities_1_1_report_service.html", "interfacecom_1_1example_1_1softwaredesigntechniques_1_1service_1_1facilities_1_1_report_service" ]
+];

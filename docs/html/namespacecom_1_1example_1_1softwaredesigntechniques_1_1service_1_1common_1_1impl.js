@@ -1,0 +1,4 @@
+var namespacecom_1_1example_1_1softwaredesigntechniques_1_1service_1_1common_1_1impl =
+[
+    [ "DefaultBaseService", "classcom_1_1example_1_1softwaredesigntechniques_1_1service_1_1common_1_1impl_1_1_default_base_service.html", "classcom_1_1example_1_1softwaredesigntechniques_1_1service_1_1common_1_1impl_1_1_default_base_service" ]
+];

@@ -1,0 +1,6 @@
+var namespacecom_1_1example_1_1softwaredesigntechniques_1_1service_1_1inventory_1_1impl =
+[
+    [ "ItemServiceImpl", "classcom_1_1example_1_1softwaredesigntechniques_1_1service_1_1inventory_1_1impl_1_1_item_service_impl.html", "classcom_1_1example_1_1softwaredesigntechniques_1_1service_1_1inventory_1_1impl_1_1_item_service_impl" ],
+    [ "StockLedgerServiceImpl", "classcom_1_1example_1_1softwaredesigntechniques_1_1service_1_1inventory_1_1impl_1_1_stock_ledger_service_impl.html", "classcom_1_1example_1_1softwaredesigntechniques_1_1service_1_1inventory_1_1impl_1_1_stock_ledger_service_impl" ],
+    [ "StockLevelServiceImpl", "classcom_1_1example_1_1softwaredesigntechniques_1_1service_1_1inventory_1_1impl_1_1_stock_level_service_impl.html", "classcom_1_1example_1_1softwaredesigntechniques_1_1service_1_1inventory_1_1impl_1_1_stock_level_service_impl" ]
+];

@@ -1,0 +1,5 @@
+var interfacecom_1_1example_1_1softwaredesigntechniques_1_1repository_1_1inventory_1_1_stock_ledger_repository =
+[
+    [ "findByItemId", "interfacecom_1_1example_1_1softwaredesigntechniques_1_1repository_1_1inventory_1_1_stock_ledger_repository.html#acb1c7574906c0805ab2fb87ff6051edf", null ],
+    [ "findByRefId", "interfacecom_1_1example_1_1softwaredesigntechniques_1_1repository_1_1inventory_1_1_stock_ledger_repository.html#ab62f51b1b8557bf1e4af058b0dcb1203", null ]
+];

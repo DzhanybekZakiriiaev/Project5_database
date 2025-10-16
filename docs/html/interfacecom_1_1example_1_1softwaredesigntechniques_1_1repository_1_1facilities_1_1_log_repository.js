@@ -1,0 +1,4 @@
+var interfacecom_1_1example_1_1softwaredesigntechniques_1_1repository_1_1facilities_1_1_log_repository =
+[
+    [ "findByDateBetween", "interfacecom_1_1example_1_1softwaredesigntechniques_1_1repository_1_1facilities_1_1_log_repository.html#a4b22e8d3a850de3b5f25e60051d64a1d", null ]
+];

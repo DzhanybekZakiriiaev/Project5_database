@@ -1,0 +1,4 @@
+var _machine_repository_8java =
+[
+    [ "com.example.softwaredesigntechniques.repository.facilities.MachineRepository", "interfacecom_1_1example_1_1softwaredesigntechniques_1_1repository_1_1facilities_1_1_machine_repository.html", "interfacecom_1_1example_1_1softwaredesigntechniques_1_1repository_1_1facilities_1_1_machine_repository" ]
+];

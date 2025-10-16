@@ -1,0 +1,5 @@
+var interfacecom_1_1example_1_1softwaredesigntechniques_1_1repository_1_1facilities_1_1_part_repository =
+[
+    [ "findByMachineId", "interfacecom_1_1example_1_1softwaredesigntechniques_1_1repository_1_1facilities_1_1_part_repository.html#a603b1d9386b061ac39340ba00d167767", null ],
+    [ "findByNameContainingIgnoreCase", "interfacecom_1_1example_1_1softwaredesigntechniques_1_1repository_1_1facilities_1_1_part_repository.html#a7945a59da9d6e347821d30f46d9ef414", null ]
+];

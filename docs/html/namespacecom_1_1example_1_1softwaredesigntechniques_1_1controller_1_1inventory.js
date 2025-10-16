@@ -1,0 +1,6 @@
+var namespacecom_1_1example_1_1softwaredesigntechniques_1_1controller_1_1inventory =
+[
+    [ "ItemController", "classcom_1_1example_1_1softwaredesigntechniques_1_1controller_1_1inventory_1_1_item_controller.html", "classcom_1_1example_1_1softwaredesigntechniques_1_1controller_1_1inventory_1_1_item_controller" ],
+    [ "StockLedgerController", "classcom_1_1example_1_1softwaredesigntechniques_1_1controller_1_1inventory_1_1_stock_ledger_controller.html", "classcom_1_1example_1_1softwaredesigntechniques_1_1controller_1_1inventory_1_1_stock_ledger_controller" ],
+    [ "StockLevelController", "classcom_1_1example_1_1softwaredesigntechniques_1_1controller_1_1inventory_1_1_stock_level_controller.html", "classcom_1_1example_1_1softwaredesigntechniques_1_1controller_1_1inventory_1_1_stock_level_controller" ]
+];

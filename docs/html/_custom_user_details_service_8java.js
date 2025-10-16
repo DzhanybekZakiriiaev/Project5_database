@@ -1,0 +1,4 @@
+var _custom_user_details_service_8java =
+[
+    [ "com.example.softwaredesigntechniques.security.CustomUserDetailsService", "classcom_1_1example_1_1softwaredesigntechniques_1_1security_1_1_custom_user_details_service.html", "classcom_1_1example_1_1softwaredesigntechniques_1_1security_1_1_custom_user_details_service" ]
+];

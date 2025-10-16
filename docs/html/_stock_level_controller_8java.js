@@ -1,0 +1,4 @@
+var _stock_level_controller_8java =
+[
+    [ "com.example.softwaredesigntechniques.controller.inventory.StockLevelController", "classcom_1_1example_1_1softwaredesigntechniques_1_1controller_1_1inventory_1_1_stock_level_controller.html", "classcom_1_1example_1_1softwaredesigntechniques_1_1controller_1_1inventory_1_1_stock_level_controller" ]
+];

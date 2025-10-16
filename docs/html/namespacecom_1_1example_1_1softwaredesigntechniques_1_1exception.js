@@ -1,0 +1,4 @@
+var namespacecom_1_1example_1_1softwaredesigntechniques_1_1exception =
+[
+    [ "NotFoundException", "classcom_1_1example_1_1softwaredesigntechniques_1_1exception_1_1_not_found_exception.html", "classcom_1_1example_1_1softwaredesigntechniques_1_1exception_1_1_not_found_exception" ]
+];

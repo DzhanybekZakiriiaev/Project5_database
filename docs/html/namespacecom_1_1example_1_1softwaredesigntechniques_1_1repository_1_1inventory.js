@@ -1,0 +1,6 @@
+var namespacecom_1_1example_1_1softwaredesigntechniques_1_1repository_1_1inventory =
+[
+    [ "ItemRepository", "interfacecom_1_1example_1_1softwaredesigntechniques_1_1repository_1_1inventory_1_1_item_repository.html", "interfacecom_1_1example_1_1softwaredesigntechniques_1_1repository_1_1inventory_1_1_item_repository" ],
+    [ "StockLedgerRepository", "interfacecom_1_1example_1_1softwaredesigntechniques_1_1repository_1_1inventory_1_1_stock_ledger_repository.html", "interfacecom_1_1example_1_1softwaredesigntechniques_1_1repository_1_1inventory_1_1_stock_ledger_repository" ],
+    [ "StockLevelRepository", "interfacecom_1_1example_1_1softwaredesigntechniques_1_1repository_1_1inventory_1_1_stock_level_repository.html", "interfacecom_1_1example_1_1softwaredesigntechniques_1_1repository_1_1inventory_1_1_stock_level_repository" ]
+];

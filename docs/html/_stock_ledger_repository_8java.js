@@ -1,0 +1,4 @@
+var _stock_ledger_repository_8java =
+[
+    [ "com.example.softwaredesigntechniques.repository.inventory.StockLedgerRepository", "interfacecom_1_1example_1_1softwaredesigntechniques_1_1repository_1_1inventory_1_1_stock_ledger_repository.html", "interfacecom_1_1example_1_1softwaredesigntechniques_1_1repository_1_1inventory_1_1_stock_ledger_repository" ]
+];
