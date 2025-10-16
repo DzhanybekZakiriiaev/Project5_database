@@ -25,6 +25,12 @@
 var NAVTREE =
 [
   [ "Project5 Database Module", "index.html", [
+    [ "Project5 Database Module", "md__c_1_2_users_2_user_2_idea_projects_2_project5__database_2docs_2mainpage.html", [
+      [ "What is this?", "md__c_1_2_users_2_user_2_idea_projects_2_project5__database_2docs_2mainpage.html#autotoc_md1", null ],
+      [ "Quick Links", "md__c_1_2_users_2_user_2_idea_projects_2_project5__database_2docs_2mainpage.html#autotoc_md2", null ],
+      [ "Schemas", "md__c_1_2_users_2_user_2_idea_projects_2_project5__database_2docs_2mainpage.html#autotoc_md3", null ],
+      [ "Team Notes", "md__c_1_2_users_2_user_2_idea_projects_2_project5__database_2docs_2mainpage.html#autotoc_md4", null ]
+    ] ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ]
     ] ],
@@ -46,9 +52,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_audited_entity_8java.html",
-"classcom_1_1example_1_1softwaredesigntechniques_1_1domain_1_1auth_1_1_role.html#a8decc9bfdd26eb1a04a7c7c22e124d3e",
-"classcom_1_1example_1_1softwaredesigntechniques_1_1service_1_1inventory_1_1impl_1_1_item_service_impl.html#afa75d685611c8b1cc22e701b22a4f93b",
-"interfacecom_1_1example_1_1softwaredesigntechniques_1_1service_1_1facilities_1_1_part_service.html#afc4cb835ca183954a34c1871511f46f9"
+"classcom_1_1example_1_1softwaredesigntechniques_1_1controller_1_1inventory_1_1_item_controller.html#a8f6f6ceb622b78c6fbff59ccb17eb2c1",
+"classcom_1_1example_1_1softwaredesigntechniques_1_1service_1_1facilities_1_1impl_1_1_part_service_impl.html#a8e7f5e1d4c853baf5b9200b61df37abb",
+"interfacecom_1_1example_1_1softwaredesigntechniques_1_1service_1_1facilities_1_1_log_service.html#a721373a9e4629e996f2193892bef1f62"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';
